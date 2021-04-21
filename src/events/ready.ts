@@ -12,7 +12,7 @@ export abstract class Ready {
     BotConfig.presences.forEach(p => presenceDuration += p.time);
     setInterval(() => this.changePresence(), presenceDuration * 1000);
 
-    console.log(await MSTeams.getAuthToken());
+    await MSTeams.getMeetings(await MSTeams.getCookies(), new Date(2021, 3, 21), new Date(2021, 4, 21));
 
     console.log("Bot ready!");
   }

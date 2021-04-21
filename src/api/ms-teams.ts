@@ -1,19 +1,74 @@
 import { APIConstants } from "./constants";
 import * as Puppeteer from "puppeteer";
+import Axios from "axios";
 
 import * as BotConfig from "../../bot-config.json";
+import MSTeamsMeeting from "./meeting";
 
 export default class MSTeams {
   static log(log: string) {
     console.log(`[MST] ${log}`);
   }
 
-  static async getAuthToken(): Promise<string> {
-    return await new Promise<string>((resolve, reject) => {
-      this.getCookies().then((cookies) => {
-        resolve(cookies.find(c => c.name == APIConstants.mstAuthToken).value);
+  static stringifyCookies(cookies: Puppeteer.Protocol.Network.Cookie[]): string {
+    let data = "";
+
+    cookies.forEach(cookie => {
+      data += cookie.name + "=" + cookie.value + "; ";
+    });
+
+    return data;
+  }
+
+  static prepareAuth(auth: string): string {
+    return auth.replace("%3D", " ").replace(APIConstants.mstAuthRemove, "");
+  }
+
+  static async getMeetings(
+    cookies: Puppeteer.Protocol.Network.Cookie[], 
+    startDate: Date, 
+    endDate: Date
+    ): Promise<MSTeamsMeeting[]> {
+    return await new Promise<MSTeamsMeeting[]>(async (resolve, reject) => {
+      this.log("Requesting calendar events...");
+
+      Axios.get(`${APIConstants.mstUrl}${APIConstants.mstCalendar}?StartDate=${startDate.toISOString()}&EndDate=${endDate.toISOString()}`, {
+        headers: {
+          cookie: this.stringifyCookies(cookies),
+          authorization: this.prepareAuth(await this.getAuthToken(cookies))
+        }
+      }).then((response) => {
+        const data = response.data.value;
+        let meetingArr: MSTeamsMeeting[] = [];
+
+        data.forEach(m => {
+          meetingArr.push({
+            subject: m.subject,
+            organizerName: m.organizerName,
+            startTime: new Date(m.startTime),
+            endTime: new Date(m.endTime),
+            isCancelled: m.isCancelled,
+            url: m.skypeTeamsMeetingUrl
+          });
+        });
+
+        resolve(meetingArr);
       })
-      .catch((err) => reject(err));
+      .catch((error) => reject(error));
+    });
+  }
+
+  static async getAuthToken(cookies?: Puppeteer.Protocol.Network.Cookie[]): Promise<string> {
+    return await new Promise<string>((resolve, reject) => {
+      if (cookies) {
+        resolve(cookies.find(c => c.name == APIConstants.mstAuthToken).value);
+      }
+      else {
+        this.getCookies().then((response) => {
+          resolve(response.find(c => c.name == APIConstants.mstAuthToken).value);
+        })
+        .catch((err) => reject(err));
+      }
     });
   }
 

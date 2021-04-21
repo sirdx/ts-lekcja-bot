@@ -8,6 +8,7 @@ export const APIConstants = {
   mstReminderButton: "#idBtn_Back",
 
   mstAuthToken: "authtoken",
+  mstAuthRemove: "%26Origin%3Dhttps%3A%2F%2Fteams.microsoft.com",
 
   mstLoginDelay: 1000,
   mstRedirectDelay: 10000
