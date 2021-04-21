@@ -3,6 +3,7 @@ import { Main } from "../main";
 
 import * as BotConfig from "../../bot-config.json";
 import { ActivityType } from "discord.js";
+import MSTeams from "../api/ms-teams";
 
 export abstract class Ready {
   @On("ready")
@@ -10,6 +11,8 @@ export abstract class Ready {
     let presenceDuration = 0;
     BotConfig.presences.forEach(p => presenceDuration += p.time);
     setInterval(() => this.changePresence(), presenceDuration * 1000);
+
+    console.log(await MSTeams.getAuthToken());
 
     console.log("Bot ready!");
   }
