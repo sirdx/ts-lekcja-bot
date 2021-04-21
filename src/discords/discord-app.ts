@@ -1,14 +1,16 @@
 import * as Path from "path";
-import { Discord, CommandNotFound, CommandMessage, On, ArgsOf, Client } from "@typeit/discord";
+import { Discord, CommandNotFound, CommandMessage } from "@typeit/discord";
 
-@Discord("t!", {
+import * as BotConfig from "../../bot-config.json";
+
+@Discord(BotConfig.prefix, {
   import: [
     Path.join(__dirname, "..", "commands", "*.ts"),
     Path.join(__dirname, "..", "events", "*.ts")
   ]
 })
 
-@Discord("t!")
+@Discord(BotConfig.prefix)
 export class DiscordApp {
   @CommandNotFound()
   notFoundA(command: CommandMessage) {

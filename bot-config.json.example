@@ -1,0 +1,21 @@
+{
+  "prefix": "!",
+  "timezone": "Europe/Warsaw",
+  "presences": [
+    {
+      "type": "WATCHING",
+      "name": "Lekcje 🎓",
+      "time": 10
+    }
+  ],
+  "settings": {
+    "reminder_cid": "",
+    "admins": [
+      ""
+    ]
+  },
+  "embed": {
+    "color": "0xffffff",
+    "footer": "Lekcja Bot | TypeScript"
+  }
+}
