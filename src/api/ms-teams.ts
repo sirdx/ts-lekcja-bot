@@ -8,7 +8,7 @@ import MSTeamsCalendar from "./calendar";
 import MSTeamsCalendarSpace from "./calendar-space";
 
 export default class MSTeams {
-  static log(log: string) {
+  private static log(log: string) {
     console.log(`[MST] ${log}`);
   }
 
@@ -17,15 +17,10 @@ export default class MSTeams {
     endDate: Date, 
     cookies?: Puppeteer.Protocol.Network.Cookie[]
     ): Promise<MSTeamsCalendarSpace[]> {
-    return await new Promise<MSTeamsCalendarSpace[]>((resolve, reject) => {
-      if (cookies) {
-        this.getMeetings(cookies, startDate, endDate).then((meetings) => {
-          resolve(MSTeamsCalendar.getCalendar(meetings));
-        }).catch(error => reject(error));
-      }
-      else {
-
-      }
+    return await new Promise<MSTeamsCalendarSpace[]>(async (resolve, reject) => {
+      this.getMeetings(cookies ?? await this.getCookies(), startDate, endDate).then((meetings) => {
+        resolve(MSTeamsCalendar.getCalendar([...meetings, ...MSTeamsCalendar.getCustomMeetings()]));
+      }).catch(error => reject(error));
     });
   }
 

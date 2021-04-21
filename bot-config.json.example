@@ -26,5 +26,21 @@
   "embed": {
     "color": "0xffffff",
     "footer": "Lekcja Bot | TypeScript"
-  }
+  },
+  "custom": [
+    {
+      "subject": "Test",
+      "organizerName": "Test",
+      "day": 3,
+      "startTime": {
+        "hour": 12,
+        "minutes": 0
+      },
+      "endTime": {
+        "hour": 13,
+        "minutes": 0
+      },
+      "url": ""
+    }
+  ]
 }
