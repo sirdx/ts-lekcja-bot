@@ -76,3 +76,4 @@ typings/
 .fusebox/
 
 bot-config.json
+*.map

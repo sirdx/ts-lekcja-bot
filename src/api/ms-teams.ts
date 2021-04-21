@@ -4,10 +4,29 @@ import Axios from "axios";
 
 import * as BotConfig from "../../bot-config.json";
 import MSTeamsMeeting from "./meeting";
+import MSTeamsCalendar from "./calendar";
+import MSTeamsCalendarSpace from "./calendar-space";
 
 export default class MSTeams {
   static log(log: string) {
     console.log(`[MST] ${log}`);
+  }
+
+  static async getCalendar(
+    startDate: Date, 
+    endDate: Date, 
+    cookies?: Puppeteer.Protocol.Network.Cookie[]
+    ): Promise<MSTeamsCalendarSpace[]> {
+    return await new Promise<MSTeamsCalendarSpace[]>((resolve, reject) => {
+      if (cookies) {
+        this.getMeetings(cookies, startDate, endDate).then((meetings) => {
+          resolve(MSTeamsCalendar.getCalendar(meetings));
+        }).catch(error => reject(error));
+      }
+      else {
+
+      }
+    });
   }
 
   static stringifyCookies(cookies: Puppeteer.Protocol.Network.Cookie[]): string {
@@ -61,11 +80,11 @@ export default class MSTeams {
   static async getAuthToken(cookies?: Puppeteer.Protocol.Network.Cookie[]): Promise<string> {
     return await new Promise<string>((resolve, reject) => {
       if (cookies) {
-        resolve(cookies.find(c => c.name == APIConstants.mstAuthToken).value);
+        resolve(cookies.find(c => c.name === APIConstants.mstAuthToken).value);
       }
       else {
         this.getCookies().then((response) => {
-          resolve(response.find(c => c.name == APIConstants.mstAuthToken).value);
+          resolve(response.find(c => c.name === APIConstants.mstAuthToken).value);
         })
         .catch((err) => reject(err));
       }
