@@ -9,24 +9,37 @@
     }
   ],
   "settings": {
-    "reminder_cid": "",
+    "reminderCID": "",
     "admins": [
       ""
-    ]
+    ],
+    "defaultPing": "@here"
   },
   "days": [
+    "Niedziela",
     "Poniedziałek",
     "Wtorek",
     "Środa",
     "Czwartek",
     "Piątek",
-    "Sobota",
-    "Niedziela"
+    "Sobota"
   ],
   "embed": {
     "color": "0xffffff",
     "footer": "Lekcja Bot | TypeScript"
   },
+  "reminder": {
+    "title": "Przypomnienie",
+    "day": "Dzień:"
+  },
+  "groups": [
+    {
+      "roleID": "",
+      "keywords": [
+        ""
+      ]
+    }
+  } 
   "custom": [
     {
       "subject": "Test",

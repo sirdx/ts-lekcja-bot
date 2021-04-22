@@ -1,9 +1,11 @@
 import { On } from "@typeit/discord";
 import { Main } from "../main";
-import { ActivityType } from "discord.js";
+import { ActivityType, MessageAttachment } from "discord.js";
 import MSTeams from "../api/ms-teams";
 import { TextChannel } from "discord.js";
 import JobScheduler from "../utils/scheduler";
+import Drawer from "../utils/drawer";
+import Groups from "../utils/groups";
 
 import * as BotConfig from "../../bot-config.json";
 
@@ -14,13 +16,21 @@ export abstract class Ready {
     BotConfig.presences.forEach(p => presenceDuration += p.time);
     setInterval(() => this.changePresence(), presenceDuration * 1000);
 
-    const calendar = await MSTeams.getCalendar(new Date(2021, 3, 21), new Date(2021, 3, 22));
+    const currentDate = new Date();
+    const calendar = await MSTeams.getCalendar(
+      new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()),
+      new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1)
+    );
 
     calendar.forEach(e => {
-      JobScheduler.scheduleJob(e.startTime, () => {
-        const channel = Main.Client.channels.cache.get(BotConfig.settings.reminder_cid) as TextChannel;
-        channel.send("Lekcja!");
+      JobScheduler.scheduleJob(e.startTime, async () => {
+        const channel = Main.Client.channels.cache.get(BotConfig.settings.reminderCID) as TextChannel;
+        const canvas = await Drawer.generateCalendarReminder(e.meetings);
+        const mentions = Groups.getReminderMentions(e.meetings);
+
+        channel.send(mentions, new MessageAttachment(canvas.toBuffer(), "meetings.png"));
       });
+      
       this.log("New job scheduled!");
     });
 
