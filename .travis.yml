@@ -3,6 +3,7 @@ node_js:
   - 12
 
 before_install:
+- npm i -g typescript
 - npm i -g ts-node 
 
 install:
