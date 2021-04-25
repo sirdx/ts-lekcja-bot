@@ -1,7 +1,6 @@
 language: node_js
 
 before_install:
-- npm i -g npm@7.11.1
 - npm i -g ts-node 
 
 install:
