@@ -1,11 +1,10 @@
 language: node_js
 
 before_install:
-- npm install -g ts-node 
+- npm i -g npm@7.11.1
+- npm i -g ts-node 
 
 install:
 - npm ci
 
-cache:
-  directories:
-  - "$HOME/.npm"
+cache: npm
