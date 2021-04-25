@@ -5,6 +5,4 @@ before_install:
 - npm i -g ts-node 
 
 install:
-- npm ci
-
-cache: npm
+- npm install
