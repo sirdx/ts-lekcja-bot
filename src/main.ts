@@ -19,7 +19,9 @@ export class Main {
       process.env.BOT_TOKEN,
       Path.join(__dirname, "discords", "*.ts"),
       Path.join(__dirname, "discords", "*.js")
-    );
+    ).catch(error => {
+      console.log(error);
+    });
   }
 }
 
