@@ -1,5 +1,6 @@
-# TS Lekcja Bot
 ![Build Status](https://api.travis-ci.com/RDevWasTaken/ts-lekcja-bot.svg?branch=main)
+
+# TS Lekcja Bot
 Bot Discord z integracją MS Teams napisany w TypeScript
 
 ## 🔍 Funkcje
