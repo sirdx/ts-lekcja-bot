@@ -13,8 +13,8 @@ export abstract class Ping {
     command.channel.send({ embed:  
         new MessageEmbed()
         .setTitle("🏓 Pong!")
-        .setDescription(`Czas odpowiedzi: ${ping} ms`)
-        .setColor(BotConfig.embed.color)
+        .setDescription(`${BotConfig.translations.commands.ping} ${ping} ms`)
+        .setColor(BotConfig.settings.embed.color)
         //.setFooter(BotConfig.embed.footer, Main.Client.user.avatarURL())
         //.setTimestamp(currentDate)
       }

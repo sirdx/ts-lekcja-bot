@@ -55,11 +55,11 @@ export default class Drawer {
       else {
         ctx.font = "bold 20px Arial";
         ctx.fillStyle = "#eeeeee";
-        ctx.fillText(BotConfig.reminder.title, centerWidth, 130);
+        ctx.fillText(BotConfig.translations.reminder.title, centerWidth, 130);
 
         ctx.font = "bold 16px Arial";
         const meetingsStart = meetings[0].startTime;
-        ctx.fillText(`${BotConfig.reminder.day} ${BotConfig.days[meetingsStart.getDay()]} | ${meetingsStart.toTimeString().split(' ')[0].substr(0, 5)}`, centerWidth, 150);
+        ctx.fillText(`${BotConfig.translations.reminder.day} ${BotConfig.translations.days[meetingsStart.getDay()]} | ${meetingsStart.toTimeString().split(' ')[0].substr(0, 5)}`, centerWidth, 150);
 
         for (let i = 0; i < meetings.length; i++) {
           const y = 180 + i * 75;

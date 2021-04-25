@@ -13,7 +13,7 @@ export abstract class Ready {
   @On("ready")
   async ready() {
     let presenceDuration = 0;
-    BotConfig.presences.forEach(p => presenceDuration += p.time);
+    BotConfig.settings.presences.forEach(p => presenceDuration += p.time);
     setInterval(() => this.changePresence(), presenceDuration * 1000);
 
     const currentDate = new Date();
@@ -44,7 +44,7 @@ export abstract class Ready {
   private changePresence() {
     let first = true;
 
-    BotConfig.presences.forEach(p => {
+    BotConfig.settings.presences.forEach(p => {
       setTimeout(() => {
         Main.Client.user.setPresence({
           activity: {

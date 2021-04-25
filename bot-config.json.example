@@ -1,42 +1,47 @@
 {
-  "prefix": "!",
-  "timezone": "Europe/Warsaw",
-  "presences": [
-    {
-      "type": "WATCHING",
-      "name": "Lekcje 🎓",
-      "time": 10
-    }
-  ],
   "settings": {
-    "reminderCID": "",
+    "prefix": "!",
+    "timezone": "Europe/Warsaw",
+    "reminderCID": "ID kanału powiadomień",
+    "defaultPing": "@here",
     "admins": [
-      ""
+      "ID administratora bota"
     ],
-    "defaultPing": "@here"
+    "presences": [
+      {
+        "type": "WATCHING",
+        "name": "Lekcje 🎓",
+        "time": 10
+      }
+    ],
+    "embed": {
+      "color": "0xffffff",
+      "footer": "Lekcja Bot | TypeScript"
+    },
   },
-  "days": [
-    "Niedziela",
-    "Poniedziałek",
-    "Wtorek",
-    "Środa",
-    "Czwartek",
-    "Piątek",
-    "Sobota"
-  ],
-  "embed": {
-    "color": "0xffffff",
-    "footer": "Lekcja Bot | TypeScript"
-  },
-  "reminder": {
-    "title": "Przypomnienie",
-    "day": "Dzień:"
-  },
+  "translations": {
+    "days": [
+      "Niedziela",
+      "Poniedziałek",
+      "Wtorek",
+      "Środa",
+      "Czwartek",
+      "Piątek",
+      "Sobota"
+    ],
+    "reminder": {
+      "title": "Przypomnienie",
+      "day": "Dzień:"
+    },
+    "commands": {
+      "ping": "Czas odpowiedzi:"
+    }
+  }
   "groups": [
     {
-      "roleID": "",
+      "roleID": "ID roli danej grupy",
       "keywords": [
-        ""
+        "słowo kluczowe np. gr. 1"
       ]
     }
   } 

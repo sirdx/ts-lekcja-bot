@@ -20,8 +20,6 @@ export class Main {
       Path.join(__dirname, "discords", "*.ts"),
       Path.join(__dirname, "discords", "*.js")
     );
-
-    // console.log(Client.getCommands());
   }
 }
 
