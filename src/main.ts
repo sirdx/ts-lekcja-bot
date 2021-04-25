@@ -21,6 +21,7 @@ export class Main {
       Path.join(__dirname, "discords", "*.js")
     ).catch(error => {
       console.log(error);
+      process.exit(0);
     });
   }
 }
