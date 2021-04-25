@@ -25,6 +25,12 @@ export default class Groups {
     }
 
     if (menArr.length > 0) {
+      if (BotConfig.settings.exclusivePing) {
+        if (menArr.length < meetings.length) {
+          return mentions;
+        }
+      }
+
       mentions = "";
       menArr.forEach(m => {
         mentions += `<@&${m}> `;

@@ -4,6 +4,7 @@
     "timezone": "Europe/Warsaw",
     "reminderCID": "ID kanału powiadomień",
     "defaultPing": "@here",
+    "exclusivePing": true,
     "admins": [
       "ID administratora bota"
     ],
