@@ -1,6 +1,7 @@
 language: node_js
-node_js: 
-  - "node"
+
+before_install:
+- npm install -g ts-node 
 
 install:
 - npm ci
